@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.Select;
 public class TrendyolTestCase {
 
 	static WebDriver driver=new ChromeDriver();
+	private static WebElement element;
 	
 	
 	public static void main(String[] args) throws InterruptedException {
@@ -136,12 +137,24 @@ public class TrendyolTestCase {
 		
 		//step4- ürünü sepete ekle
 		
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		String control=driver.findElement(By.xpath("//*[@id='product-detail-app']/div/div[2]/div[2]/div[2]")).getText();
 			
 		//random butik e gidildigi icin beden secenegi olan-olamayan urunlerin kontrolu 
 		if(control.contains("Beden")) {
-			WebElement element=driver.findElement(By.xpath("//*[@id='product-detail-app']/div/div[2]/div[2]/div[2]/div[2]/div[2]/div/div[2]"));
+			Thread.sleep(3000);
+			
+			int renkKontrol;
+			//renk seçeneðine göre xpath de deðiþme oluyor.
+			if(control.contains("Renk"))
+			{
+				renkKontrol=3;
+			}
+			else {
+				renkKontrol=2;
+			}
+	
+			WebElement element=driver.findElement(By.xpath("//*[@id='product-detail-app']/div/div[2]/div[2]/div[2]/div["+renkKontrol+"]/div[2]/div/div[2]"));
 			Select select=new Select(element);
 			for (int s = 0; s < args.length; s++) {
 				try {
